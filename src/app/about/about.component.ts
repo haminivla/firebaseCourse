@@ -34,27 +34,51 @@ export class AboutComponent {
         }
     }
 
+    onReadDoc() {
+        this.db.doc("courses/Gxgy7ILsHEXC9n4KNpfH").valueChanges()
+            .subscribe(snap => {
+                console.log(snap);
+                // console.log(snap.payload.id);
+                // console.log(snap.payload.data());
+            })
+    }
+
+    onReadDoc2() {
+        this.db.doc("courses/Gxgy7ILsHEXC9n4KNpfH").snapshotChanges()
+            .subscribe(snap => {
+                console.log(snap.payload.id);
+                console.log(snap.payload.data());
+            })
+    }
+
+    onReadCollection() {
+        this.db.collection("courses",
+        ref => ref.where("seqNo", "<=", 10).where("url", "==", "angular-testing-course")
+        .orderBy("seqNo")
+    ).get()
+        .subscribe(snaps => {
+            snaps.forEach(snap => {
+                console.log(snap.id);
+                console.log(snap.data());
+            })
+        })    
+    }
+
+    onReadCollectionGroup() {
+        this.db.collectionGroup("lessons",
+        ref => ref.where("seqNo", "==", 1)
+    ).get()
+        .subscribe(snaps => {
+            snaps.forEach(snap => {
+                console.log(snap.id);
+                console.log(snap.data());
+            })
+        })    
+    }
+
     removeId(data: any) {
         const newData: any = {...data};
         delete newData.id;
         return newData;
     }
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
