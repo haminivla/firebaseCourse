@@ -11,9 +11,11 @@ export default async (snap, context) => {
 
     const course = snap.data();
 
-    if(course.promo) {
-        return db.doc("courses/stats").update({
-            totalPromo: firestore.FieldValue.increment(1)
-        })
+    if(!course.promo) {
+        return;
     }
+
+    return db.doc(`courses/stats`).update({
+        totalPromo: firestore.FieldValue.increment(-1)
+    });
 }

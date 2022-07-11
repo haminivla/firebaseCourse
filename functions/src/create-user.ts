@@ -1,8 +1,7 @@
-import {auth, db} from "./init";
-
 const express = require('express');
 import * as functions from 'firebase-functions';
-import {getUserCredentialsMiddleware} from "./auth.middleware";
+import { getUserCredentialsMiddleware } from './auth.middleware';
+import { db, auth } from './init';
 
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -13,15 +12,13 @@ createUserApp.use(bodyParser.json());
 createUserApp.use(cors({origin:true}));
 createUserApp.use(getUserCredentialsMiddleware);
 
-
 createUserApp.post("/", async (req, res) => {
-
-    functions.logger.debug(`Calling create user function.`);
+    
+    functions.logger.debug(`Calling create user function`);
 
     try {
-
-        if (!(req["uid"] && req["admin"])) {
-            const message = `Denied access to user creation service.`;
+        if(!(req["uid"] && req["admin"])) {
+            const message = `Denied access to create user`;
             functions.logger.debug(message);
             res.status(403).json({message});
             return;
@@ -34,20 +31,16 @@ createUserApp.post("/", async (req, res) => {
         const user = await auth.createUser({
             email,
             password
-        });
+        })
 
         await auth.setCustomUserClaims(user.uid, {admin});
 
         db.doc(`users/${user.uid}`).set({});
 
-
-        res.status(200).json({message:"User created successfully."});
-
+        res.status(200).json({message: "User created successfully."});
     }
     catch(err) {
         functions.logger.error(`Could not create user.`, err);
         res.status(500).json({message: "Could not create user."});
     }
-
 });
-

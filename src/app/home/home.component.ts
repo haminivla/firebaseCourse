@@ -4,8 +4,8 @@ import {Observable, of} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Router} from '@angular/router';
-import {CoursesService} from "../services/courses.service";
-import {UserService} from "../services/user.service";
+import { CoursesService } from '../services/courses.service';
+import { UserService } from '../services/user.service';
 
 
 @Component({
@@ -27,17 +27,12 @@ export class HomeComponent implements OnInit {
     }
 
     ngOnInit() {
-
-        this.reloadCourses();
-
+      this.reloadCourses();
     }
 
     reloadCourses() {
-
-        this.beginnersCourses$ = this.coursesService.loadCoursesByCategory("BEGINNER");
-
-        this.advancedCourses$ = this.coursesService.loadCoursesByCategory("ADVANCED");
-
+      this.beginnersCourses$ = this.coursesService.loadCoursesByCategory("BEGINNER");
+      this.advancedCourses$ = this.coursesService.loadCoursesByCategory("ADVANCED");
     }
 
 }

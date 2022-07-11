@@ -36,13 +36,9 @@ export class LoginComponent implements OnInit, OnDestroy {
             };
 
             this.ui = new firebaseui.auth.AuthUI(app.auth());
-
             this.ui.start("#firebaseui-auth-container", uiConfig);
-
             this.ui.disableAutoSignIn();
         });
-
-
     }
 
     ngOnDestroy() {
@@ -50,13 +46,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     onLoginSuccessful(result) {
-
-        console.log('Firebase UI result:', result);
-
         this.router.navigateByUrl("/courses");
-
-
-
     }
 }
 

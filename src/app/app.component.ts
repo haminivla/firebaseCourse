@@ -4,8 +4,8 @@ import {from, Observable} from 'rxjs';
 import {concatMap, filter, map} from 'rxjs/operators';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Router} from '@angular/router';
-import {UserService} from "./services/user.service";
-import {AuthTokenService} from "./services/auth-token.service";
+import { UserService } from './services/user.service';
+import { AuthTokenService } from './services/auth-token.service';
 
 @Component({
   selector: 'app-root',
@@ -15,8 +15,8 @@ import {AuthTokenService} from "./services/auth-token.service";
 export class AppComponent implements OnInit {
 
   constructor(
-      public user: UserService,
-      private token: AuthTokenService) {
+    public user: UserService,
+    private token: AuthTokenService) {
 
   }
 
@@ -24,7 +24,8 @@ export class AppComponent implements OnInit {
 
   }
 
-    logout() {
-        this.user.logout();
-    }
+  logout() {
+    this.user.logout();
+  }
+
 }

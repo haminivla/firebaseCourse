@@ -14,24 +14,15 @@
 
       <span>Course thumbnail:</span>
 
-      <img class="course-thumbnail mat-elevation-z3"
-           [src]="iconUrl"
-           *ngIf="iconUrl">
+      <img class="course-thumbnail mat-elevation-z3" [src]="iconUrl" *ngIf="iconUrl">
 
-      <input type="file" (change)="uploadThumbnail($event)">
-
-       <div class="upload-progress" *ngIf="(percentageChanges$ | async) as percentage">
-
-           <mat-progress-bar class="progress-bar"
-                             mode="determinate"
-            [value]="percentage">
-
-           </mat-progress-bar>
-
-           <span>{{percentage / 100 | percent}}</span>
-
-       </div>
-
+        <input type="file" (change)="uploadThumbnail($event)">
+          <div class="upload-progress" *ngIf="(percentageChanges$ | async) as percentage">
+            <mat-progress-bar class="progress-bar" mode="determinate" [value]="percentage">
+            </mat-progress-bar>
+            <span>{{percentage / 100 | percent}}</span>
+          </div>
+    
     </div>
 
     <mat-form-field appearance="outline">
@@ -52,8 +43,7 @@
 
     <mat-form-field appearance="outline">
 
-      <textarea matInput placeholder="Course description"
-                formControlName="longDescription"></textarea>
+      <textarea matInput placeholder="Course description" formControlName="longDescription"></textarea>
 
     </mat-form-field>
 
@@ -68,13 +58,10 @@
       <mat-datepicker #promoStartPicker></mat-datepicker>
     </mat-form-field>
 
-    <button mat-raised-button color="warn" [disabled]="!form.valid"
-        (click)="onCreateCourse()">
+    <button mat-raised-button color="warn" [disabled]="!form.valid" (click)="onCreateCourse()">
       Create Course
     </button>
 
   </form>
 
 </div>
-
-

@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
 import {throwError} from 'rxjs';
-import {environment} from "../../environments/environment";
+import { environment } from 'src/environments/environment';
 
 @Component({
     selector: 'create-user',
@@ -18,11 +18,11 @@ export class CreateUserComponent {
         admin: [false]
     });
 
-    constructor(
-        private fb: FormBuilder,
-        private http: HttpClient) {
+  constructor(
+      private fb: FormBuilder,
+      private http: HttpClient) {
 
-    }
+  }
 
     onCreateUser() {
 
@@ -31,23 +31,21 @@ export class CreateUserComponent {
         console.log(user);
 
         this.http.post(environment.api.createUser, {
-            email: user.email,
-            password: user.password,
-            admin: user.admin
+          email: user.email,
+          password: user.password,
+          admin: user.admin
         })
-            .pipe(
-                catchError(err => {
-                    console.log(err);
-                    alert('Could not create user');
-                    return throwError(err);
-                })
-            )
-            .subscribe(() => {
-                alert("User created successfully!");
-                this.form.reset();
-            });
-
-
+        .pipe(
+          catchError(err => {
+            console.log(err);
+            alert('Could not create user');
+            return throwError(err);
+          })
+        )
+        .subscribe(() => {
+          alert("User created successfully!");
+          this.form.reset();
+        });
 
     }
 
