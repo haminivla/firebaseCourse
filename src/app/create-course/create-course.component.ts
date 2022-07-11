@@ -9,7 +9,6 @@ import {Router} from '@angular/router';
 import {AngularFireStorage} from '@angular/fire/storage';
 import firebase from 'firebase/app';
 import Timestamp = firebase.firestore.Timestamp;
-import {CoursesService} from "../services/courses.service";
 
 @Component({
     selector: 'create-course',
@@ -38,7 +37,8 @@ export class CreateCourseComponent implements OnInit {
               private storage: AngularFireStorage) {
 
     percentageChanges$: Observable<number>;
-
+  }
+  
   uploadThumbnail(event) {
     const file:File = event.target.files[0];
     const filePath = `courses/${this.courseId}/${file.name}`;
